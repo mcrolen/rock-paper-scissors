@@ -2,9 +2,10 @@ let winCount = 0;
 let lossCount = 0;
 let tieCount = 0;
 
-const playerScore = document.querySelector("#player-score");
-const cpuScore = document.querySelector("#cpu-score");
-const tieScore = document.querySelector("#tie-score");
+const playerScore = document.querySelector('#player-score');
+const cpuScore = document.querySelector('#cpu-score');
+const tieScore = document.querySelector('#tie-score');
+const gameResult = document.querySelector('#game-result');
 
 function computerPlay() {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -25,17 +26,17 @@ function playRound(playerSelection, computerSelection) {
         case "rock":
             switch(computerSelection) {
                 case "rock":
-                    console.log("Tie!");
+                    gameResult.textContent = "Tie!";
                     tieCount++;
                     tieScore.textContent = tieCount;
                     break;
                 case "scissors":
-                    console.log("You win! Rock smashes scissors!");
+                    gameResult.textContent = "You win! Rock smashes scissors!";
                     winCount++;
                     playerScore.textContent = winCount;
                     break;
                 case "paper":
-                    console.log("You lose! Paper covers rock!");
+                    gameResult.textContent = "You lose! Paper covers rock!";
                     lossCount++;
                     cpuScore.textContent = lossCount;
                     break;
@@ -44,17 +45,17 @@ function playRound(playerSelection, computerSelection) {
         case "scissors":
             switch(computerSelection) {
                 case "rock":
-                    console.log("You lose! Rock smashes scissors!");
+                    gameResult.textContent = "You lose! Rock smashes scissors!";
                     lossCount++;
                     cpuScore.textContent = lossCount;
                     break;
                 case "scissors":
-                    console.log("Tie!");
+                    gameResult.textContent = "Tie!";
                     tieCount++;
                     tieScore.textContent = tieCount;
                     break;
                 case "paper":
-                    console.log("You win! Scissors cut paper!");
+                    gameResult.textContent = "You win! Scissors cut paper!";
                     winCount++;
                     playerScore.textContent = winCount;
                     break;
@@ -63,17 +64,17 @@ function playRound(playerSelection, computerSelection) {
         case "paper":
             switch(computerSelection) {
                 case "rock":
-                    console.log("You win! Paper covers rock!");
+                    gameResult.textContent = "You win! Paper covers rock!";
                     winCount++;
                     playerScore.textContent = winCount;
                     break;
                 case "scissors":
-                    console.log("You lose! Scissors cut paper!");
+                    gameResult.textContent = "You lose! Scissors cut paper!";
                     lossCount++;
                     cpuScore.textContent = lossCount;
                     break;
                 case "paper":
-                    console.log("Tie!");
+                    gameResult.textContent = "Tie!";
                     tieCount++;
                     tieScore.textContent = tieCount;
                     break;
