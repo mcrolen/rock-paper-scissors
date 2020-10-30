@@ -1,11 +1,3 @@
-let winCount = 0;
-let lossCount = 0;
-let tieCount = 0;
-
-const playerScore = document.querySelector("#player-score");
-const cpuScore = document.querySelector("#cpu-score");
-const tieScore = document.querySelector("#tie-score");
-
 function computerPlay() {
     const randomNumber = Math.floor(Math.random() * 3);
     
@@ -20,24 +12,21 @@ function computerPlay() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
-    switch(playerSelection) {
+function playRound(playerSelection, computerSelection, winsCount) {
+
+    switch(playerSelection.toLowerCase()) {
         case "rock":
             switch(computerSelection) {
                 case "rock":
                     console.log("Tie!");
-                    tieCount++;
-                    tieScore.textContent = tieCount;
                     break;
                 case "scissors":
                     console.log("You win! Rock smashes scissors!");
-                    winCount++;
-                    playerScore.textContent = winCount;
+                    winsCount++;
                     break;
                 case "paper":
                     console.log("You lose! Paper covers rock!");
-                    lossCount++;
-                    cpuScore.textContent = lossCount;
+                    winsCount--;
                     break;
             }
             break;
@@ -45,18 +34,14 @@ function playRound(playerSelection, computerSelection) {
             switch(computerSelection) {
                 case "rock":
                     console.log("You lose! Rock smashes scissors!");
-                    lossCount++;
-                    cpuScore.textContent = lossCount;
+                    winsCount--;
                     break;
                 case "scissors":
                     console.log("Tie!");
-                    tieCount++;
-                    tieScore.textContent = tieCount;
                     break;
                 case "paper":
                     console.log("You win! Scissors cut paper!");
-                    winCount++;
-                    playerScore.textContent = winCount;
+                    winsCount++;
                     break;
             }
             break;
@@ -64,29 +49,37 @@ function playRound(playerSelection, computerSelection) {
             switch(computerSelection) {
                 case "rock":
                     console.log("You win! Paper covers rock!");
-                    winCount++;
-                    playerScore.textContent = winCount;
+                    winsCount++;
                     break;
                 case "scissors":
                     console.log("You lose! Scissors cut paper!");
-                    lossCount++;
-                    cpuScore.textContent = lossCount;
+                    winsCount--;
                     break;
                 case "paper":
                     console.log("Tie!");
-                    tieCount++;
-                    tieScore.textContent = tieCount;
                     break;
             }
             break;
     }
-    if (winCount >= 5) alert("You win!");
-    if (lossCount >= 5) alert("You lose!");
+    return winsCount;
 }
 
-function startGame (e) {;
-    playRound(this.id, computerPlay());
+function game() {
+    let gameCount = 0;
+    let winsCount = 0;
+
+    while (gameCount < 5) {
+        winsCount = playRound(prompt("Choose your implement!", ""), computerPlay(), winsCount);
+        gameCount++;    
+    }
+
+    if (winsCount > 0) {
+        console.log(`You won! 😎`);
+    } else if (winsCount < 0) {
+        console.log(`You lost! 😥`);
+    } else {
+        console.log(`Draw! 😅`);
+    }
 }
 
-const buttons = Array.from(document.querySelectorAll('button'));
-buttons.forEach(button => button.addEventListener('click', startGame));
+game();
